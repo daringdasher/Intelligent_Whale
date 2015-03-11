@@ -2,11 +2,29 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Content;
+using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework.Storage;
+using Microsoft.Xna.Framework.GamerServices;
+
 
 namespace Breach_Of_Contract
 {
     //Parent Class to Players and Enemies
-    class Character
+    abstract class Character
     {
+        //Attributes
+        protected int health;
+        protected Vector2 position;
+        protected bool isBehindCover;
+        protected bool isDead;
+
+        //Constructor
+        public abstract Character(int hlth, Vector2 pos);
+    
+        //Methods
+        public abstract void Shoot();
     }
 }
