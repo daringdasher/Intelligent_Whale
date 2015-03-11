@@ -8,3 +8,6 @@ D:\GDAPS Proj\Breach_Of_Contract\Breach_Of_Contract\bin\WindowsGL\Debug\Tao.Sdl.
 D:\GDAPS Proj\Breach_Of_Contract\Breach_Of_Contract\obj\x86\Debug\Breach_Of_Contract.csprojResolveAssemblyReference.cache
 D:\GDAPS Proj\Breach_Of_Contract\Breach_Of_Contract\obj\x86\Debug\Breach_Of_Contract.exe
 D:\GDAPS Proj\Breach_Of_Contract\Breach_Of_Contract\obj\x86\Debug\Breach_Of_Contract.pdb
+D:\GDAPS Proj\Breach_Of_Contract\Breach_Of_Contract\bin\WindowsGL\Debug\Content\Bullet.xnb
+D:\GDAPS Proj\Breach_Of_Contract\Breach_Of_Contract\bin\WindowsGL\Debug\Content\Soldier_Shooting.xnb
+D:\GDAPS Proj\Breach_Of_Contract\Breach_Of_Contract\bin\WindowsGL\Debug\Content\Soldier_Walking.xnb

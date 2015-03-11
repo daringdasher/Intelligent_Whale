@@ -18,12 +18,14 @@ namespace Breach_Of_Contract
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
-
+        Texture2D test;
+        Player testplayer;
         public Game1()
             : base()
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
+            testplayer= new Player("testplayer1",new Vector2(10,10));
         }
 
         /// <summary>
@@ -47,7 +49,7 @@ namespace Breach_Of_Contract
         {
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
-
+            test = Content.Load<Texture2D>("Soldier_Shooting");
             // TODO: use this.Content to load your game content here
         }
 
@@ -83,6 +85,9 @@ namespace Breach_Of_Contract
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
+            spriteBatch.Begin();
+            spriteBatch.Draw(test,testplayer.Position,Color.White);
+            spriteBatch.End();
             // TODO: Add your drawing code here
 
             base.Draw(gameTime);

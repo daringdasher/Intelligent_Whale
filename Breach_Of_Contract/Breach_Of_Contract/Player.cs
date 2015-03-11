@@ -21,14 +21,22 @@ namespace Breach_Of_Contract
         protected int health;
         protected bool isBehindCover;
         protected bool isDead;
+        protected Rectangle playerRect;
+
+        //Properties
+        public Vector2 Position
+        {
+            get { return position; }
+        }
 
         //Constructor
-        public Player(string identity, Weapon[] weaps, Vector2 pos):base()
+        public Player(string identity, /*Weapon[] weaps,*/ Vector2 pos):base()
         {
             health = 100;
             id = identity;
-            weapons = weaps;
+            //weapons = weaps;
             position = pos;
+            playerRect = new Rectangle(10, 10, 16, 16);
         }
 
         public override void Shoot()
