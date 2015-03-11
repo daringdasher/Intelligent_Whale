@@ -1,0 +1,10 @@
+D:\GDAPS Proj\Breach_Of_Contract\Breach_Of_Contract\bin\WindowsGL\Debug\SDL.dll
+D:\GDAPS Proj\Breach_Of_Contract\Breach_Of_Contract\bin\WindowsGL\Debug\Breach_Of_Contract.exe
+D:\GDAPS Proj\Breach_Of_Contract\Breach_Of_Contract\bin\WindowsGL\Debug\Breach_Of_Contract.pdb
+D:\GDAPS Proj\Breach_Of_Contract\Breach_Of_Contract\bin\WindowsGL\Debug\Lidgren.Network.dll
+D:\GDAPS Proj\Breach_Of_Contract\Breach_Of_Contract\bin\WindowsGL\Debug\MonoGame.Framework.dll
+D:\GDAPS Proj\Breach_Of_Contract\Breach_Of_Contract\bin\WindowsGL\Debug\OpenTK.dll
+D:\GDAPS Proj\Breach_Of_Contract\Breach_Of_Contract\bin\WindowsGL\Debug\Tao.Sdl.dll
+D:\GDAPS Proj\Breach_Of_Contract\Breach_Of_Contract\obj\x86\Debug\Breach_Of_Contract.csprojResolveAssemblyReference.cache
+D:\GDAPS Proj\Breach_Of_Contract\Breach_Of_Contract\obj\x86\Debug\Breach_Of_Contract.exe
+D:\GDAPS Proj\Breach_Of_Contract\Breach_Of_Contract\obj\x86\Debug\Breach_Of_Contract.pdb
