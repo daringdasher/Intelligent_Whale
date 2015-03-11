@@ -22,7 +22,9 @@ namespace Breach_Of_Contract
         protected bool isDead;
 
         //Constructor
-        public abstract Character(int hlth, Vector2 pos);
+        public Character()
+        {
+        }
     
         //Methods
         public abstract void Shoot();
