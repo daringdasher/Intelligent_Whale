@@ -20,12 +20,14 @@ namespace Breach_Of_Contract
         SpriteBatch spriteBatch;
         Texture2D test;
         Player testplayer;
+        bool startScreenActive;
         public Game1()
             : base()
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
             testplayer= new Player("testplayer1",new Vector2(10,10));
+            startScreenActive = true;
         }
 
         /// <summary>
@@ -37,7 +39,9 @@ namespace Breach_Of_Contract
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
-
+            graphics.IsFullScreen = false;
+            graphics.PreferredBackBufferHeight = 720;
+            graphics.PreferredBackBufferWidth = 1280;
             base.Initialize();
         }
 
@@ -84,12 +88,13 @@ namespace Breach_Of_Contract
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
-
-            spriteBatch.Begin();
-            spriteBatch.Draw(test,testplayer.Position,Color.White);
-            spriteBatch.End();
             // TODO: Add your drawing code here
-
+            spriteBatch.Begin();
+            //if (startScreenActive) {(Draw Start Screen)}
+            spriteBatch.Draw(test,testplayer.Position,Color.White);
+            
+            
+            spriteBatch.End();
             base.Draw(gameTime);
         }
     }
