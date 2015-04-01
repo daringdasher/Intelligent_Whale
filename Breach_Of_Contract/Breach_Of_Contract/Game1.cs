@@ -17,17 +17,25 @@ namespace Breach_Of_Contract
     public class Game1 : Game
     {
         GraphicsDeviceManager graphics;
+        
         SpriteBatch spriteBatch;
-        Texture2D test;
-        Player testplayer;
+        Texture2D test1;
+        Texture2D test2;
+        Player testPlayer;
+        Enemy testEnemy;
         bool startScreenActive;
+        Map map;
+        List<object> objectList = new List<object>();
         public Game1()
             : base()
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
-            testplayer= new Player("testplayer1",new Vector2(10,10));
             startScreenActive = true;
+            graphics.PreferredBackBufferHeight = 720;
+            graphics.PreferredBackBufferWidth = 1280;
+            map = new Map();
+            objectList = map.LoadMap("test.txt");
         }
 
         /// <summary>
@@ -40,8 +48,9 @@ namespace Breach_Of_Contract
         {
             // TODO: Add your initialization logic here
             graphics.IsFullScreen = false;
-            graphics.PreferredBackBufferHeight = 720;
-            graphics.PreferredBackBufferWidth = 1280;
+            graphics.PreferredBackBufferHeight = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height;
+            graphics.PreferredBackBufferWidth = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width;
+
             base.Initialize();
         }
 
@@ -53,7 +62,14 @@ namespace Breach_Of_Contract
         {
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
-            test = Content.Load<Texture2D>("Soldier_Shooting");
+
+            foreach (object element in objectList)
+            {
+                if (element is Player) { testPlayer = (Player)element; test1 = Content.Load<Texture2D>("Soldier_Walking"); }
+                if (element is Enemy) { testEnemy = (Enemy)element; test2 = Content.Load<Texture2D>("Soldier_Shooting"); }
+
+            }
+            
             // TODO: use this.Content to load your game content here
         }
 
@@ -91,9 +107,9 @@ namespace Breach_Of_Contract
             // TODO: Add your drawing code here
             spriteBatch.Begin();
             //if (startScreenActive) {(Draw Start Screen)}
-            spriteBatch.Draw(test,testplayer.Position,Color.White);
-            
-            
+            spriteBatch.Draw(test1, testPlayer.Position, Color.White);
+            spriteBatch.Draw(test2, testEnemy.Position, Color.White);            
+
             spriteBatch.End();
             base.Draw(gameTime);
         }
