@@ -31,7 +31,6 @@ namespace Breach_Of_Contract
                 int idNum;int xCord;int yCord;
                 string[] contentStringArray;
                 string contentString;
-                int i = 0;
                 while (!reader.EndOfStream)
                 {
                     contentString = reader.ReadLine();
@@ -49,7 +48,10 @@ namespace Breach_Of_Contract
         }
         public void createPlayer(int xPos, int yPos)
         {
-            objects.Add(new Player("test1",new Vector2(xPos,yPos)));
+            objects.Add(new Player("blue", new Vector2(xPos-64, yPos)));
+            objects.Add(new Player("orange", new Vector2(xPos, yPos-64)));
+            objects.Add(new Player("brown", new Vector2(xPos+64, yPos)));
+            objects.Add(new Player("scott", new Vector2(xPos, yPos+64)));
         }
         public void createEnemy(int xPos, int yPos)
         {

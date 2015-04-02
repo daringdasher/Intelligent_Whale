@@ -22,13 +22,25 @@ namespace Breach_Of_Contract
         protected bool isBehindCover;
         protected bool isDead;
         protected Rectangle playerRect;
+        protected float rotation;
 
         //Properties
         public Vector2 Position
         {
             get { return position; }
         }
-
+        public String ID
+        {
+            get { return id; }
+        }
+        public Rectangle PlayerRect
+        {
+            get { return playerRect; }
+        }
+        public float Rotation
+        {
+            get { return rotation; }
+        }
         //Constructor
         public Player(string identity, /*Weapon[] weaps,*/ Vector2 pos):base()
         {
@@ -36,9 +48,21 @@ namespace Breach_Of_Contract
             id = identity;
             //weapons = weaps;
             position = pos;
-            playerRect = new Rectangle(10, 10, 16, 16);
+            playerRect = new Rectangle(0, 0, 256, 256);
         }
+        public void move(Vector2 dest)
+        {
+            if (dest != Vector2.Zero)
+            {
+                Vector2 vector = new Vector2(dest.X - position.X, dest.Y - position.Y);
+                Vector2 unitVector = Vector2.Normalize(vector);
+                Vector2 newPosition = new Vector2(position.X + unitVector.X * 2, position.Y + unitVector.Y * 2);
+                position = newPosition;
+                playerRect = new Rectangle((int)position.X - 64, (int)position.Y - 64, 256, 256);
+                //rotation = (float)Math.Atan2(vector.X, -vector.Y);
+            }
 
+        }
         public override void Shoot()
         {
             throw new NotImplementedException();

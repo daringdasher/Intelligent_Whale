@@ -24,3 +24,7 @@ D:\Users\mxd2278.MAIN.001\Documents\Intelligent_Whale\Breach_Of_Contract\Breach_
 D:\Users\mxd2278.MAIN.001\Documents\Intelligent_Whale\Breach_Of_Contract\Breach_Of_Contract\bin\WindowsGL\Debug\OpenTK.dll
 D:\Users\mxd2278.MAIN.001\Documents\Intelligent_Whale\Breach_Of_Contract\Breach_Of_Contract\bin\WindowsGL\Debug\Tao.Sdl.dll
 D:\Users\mxd2278.MAIN.001\Documents\Intelligent_Whale\Breach_Of_Contract\Breach_Of_Contract\obj\x86\Debug\Breach_Of_Contract.csprojResolveAssemblyReference.cache
+D:\GDAPS Proj\Breach_Of_Contract\Breach_Of_Contract\bin\WindowsGL\Debug\Content\Players\Blue.xnb
+D:\GDAPS Proj\Breach_Of_Contract\Breach_Of_Contract\bin\WindowsGL\Debug\Content\Players\Brown.xnb
+D:\GDAPS Proj\Breach_Of_Contract\Breach_Of_Contract\bin\WindowsGL\Debug\Content\Players\Orange.xnb
+D:\GDAPS Proj\Breach_Of_Contract\Breach_Of_Contract\bin\WindowsGL\Debug\Content\Players\Scott.xnb
