@@ -59,7 +59,7 @@ namespace Breach_Of_Contract
                 Vector2 newPosition = new Vector2(position.X + unitVector.X * 2, position.Y + unitVector.Y * 2);
                 position = newPosition;
                 playerRect = new Rectangle((int)position.X - 64, (int)position.Y - 64, 256, 256);
-                //rotation = (float)Math.Atan2(vector.X, -vector.Y);
+                rotation = (float)Math.Atan2(vector.X, -vector.Y);
             }
 
         }

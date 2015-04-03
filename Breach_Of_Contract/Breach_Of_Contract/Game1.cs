@@ -155,8 +155,7 @@ namespace Breach_Of_Contract
             // TODO: Add your drawing code here
             spriteBatch.Begin();
             //if (startScreenActive) {(Draw Start Screen)}
-            //if(!blueSprite.Bounds.Intersects(scottSprite.Bounds))spriteBatch.Draw(blueSprite, player1.Position, new Rectangle(0, 0, 256, 256), Color.White, player1Rot, new Vector2(128, 128), .25f, SpriteEffects.None, 0F);
-            spriteBatch.Draw(blueSprite, new Vector2(player1.PlayerRect.X,player1.PlayerRect.Y), player1.PlayerRect, Color.Black, player1Rot, new Vector2(128, 128), .25f, SpriteEffects.None, 0F);
+            spriteBatch.Draw(blueSprite, player1.Position, new Rectangle(0,0,256,256), Color.White, player1Rot, new Vector2(128, 128), .25f, SpriteEffects.None, 0F);
             spriteBatch.Draw(brownSprite, player2.Position, new Rectangle(0, 0, 256, 256), Color.White, player2Rot, new Vector2(128, 128), .25f, SpriteEffects.None, 0F);
             spriteBatch.Draw(orangeSprite, player3.Position, new Rectangle(0, 0, 256, 256), Color.White, player3Rot, new Vector2(128, 128), .25f, SpriteEffects.None, 0F);
             spriteBatch.Draw(scottSprite, player4.Position, new Rectangle(0, 0, 256, 256), Color.White, player4Rot, new Vector2(128, 128), .25f, SpriteEffects.None, 0F);
