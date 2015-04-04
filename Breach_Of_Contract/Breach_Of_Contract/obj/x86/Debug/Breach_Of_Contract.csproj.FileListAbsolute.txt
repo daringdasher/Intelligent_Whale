@@ -28,3 +28,23 @@ D:\GDAPS Proj\Breach_Of_Contract\Breach_Of_Contract\bin\WindowsGL\Debug\Content\
 D:\GDAPS Proj\Breach_Of_Contract\Breach_Of_Contract\bin\WindowsGL\Debug\Content\Players\Brown.xnb
 D:\GDAPS Proj\Breach_Of_Contract\Breach_Of_Contract\bin\WindowsGL\Debug\Content\Players\Orange.xnb
 D:\GDAPS Proj\Breach_Of_Contract\Breach_Of_Contract\bin\WindowsGL\Debug\Content\Players\Scott.xnb
+C:\Users\Tim\Desktop\Intelligent_Whale\Breach_Of_Contract\Breach_Of_Contract\obj\x86\Debug\Breach_Of_Contract.exe
+C:\Users\Tim\Desktop\Intelligent_Whale\Breach_Of_Contract\Breach_Of_Contract\obj\x86\Debug\Breach_Of_Contract.pdb
+C:\Users\Tim\Desktop\Intelligent_Whale\Breach_Of_Contract\Breach_Of_Contract\bin\WindowsGL\Debug\SDL.dll
+C:\Users\Tim\Desktop\Intelligent_Whale\Breach_Of_Contract\Breach_Of_Contract\bin\WindowsGL\Debug\Content\Bullet.xnb
+C:\Users\Tim\Desktop\Intelligent_Whale\Breach_Of_Contract\Breach_Of_Contract\bin\WindowsGL\Debug\Content\Enemies\Enemy1.xnb
+C:\Users\Tim\Desktop\Intelligent_Whale\Breach_Of_Contract\Breach_Of_Contract\bin\WindowsGL\Debug\Content\Enemies\Enemy2.xnb
+C:\Users\Tim\Desktop\Intelligent_Whale\Breach_Of_Contract\Breach_Of_Contract\bin\WindowsGL\Debug\Content\Enemies\Enemy3.xnb
+C:\Users\Tim\Desktop\Intelligent_Whale\Breach_Of_Contract\Breach_Of_Contract\bin\WindowsGL\Debug\Content\Players\Blue.xnb
+C:\Users\Tim\Desktop\Intelligent_Whale\Breach_Of_Contract\Breach_Of_Contract\bin\WindowsGL\Debug\Content\Players\Brown.xnb
+C:\Users\Tim\Desktop\Intelligent_Whale\Breach_Of_Contract\Breach_Of_Contract\bin\WindowsGL\Debug\Content\Players\Orange.xnb
+C:\Users\Tim\Desktop\Intelligent_Whale\Breach_Of_Contract\Breach_Of_Contract\bin\WindowsGL\Debug\Content\Players\Scott.xnb
+C:\Users\Tim\Desktop\Intelligent_Whale\Breach_Of_Contract\Breach_Of_Contract\bin\WindowsGL\Debug\Content\Soldier_Shooting.xnb
+C:\Users\Tim\Desktop\Intelligent_Whale\Breach_Of_Contract\Breach_Of_Contract\bin\WindowsGL\Debug\Content\Soldier_Walking.xnb
+C:\Users\Tim\Desktop\Intelligent_Whale\Breach_Of_Contract\Breach_Of_Contract\obj\x86\Debug\Breach_Of_Contract.csprojResolveAssemblyReference.cache
+C:\Users\Tim\Desktop\Intelligent_Whale\Breach_Of_Contract\Breach_Of_Contract\bin\WindowsGL\Debug\Breach_Of_Contract.exe
+C:\Users\Tim\Desktop\Intelligent_Whale\Breach_Of_Contract\Breach_Of_Contract\bin\WindowsGL\Debug\Breach_Of_Contract.pdb
+C:\Users\Tim\Desktop\Intelligent_Whale\Breach_Of_Contract\Breach_Of_Contract\bin\WindowsGL\Debug\Lidgren.Network.dll
+C:\Users\Tim\Desktop\Intelligent_Whale\Breach_Of_Contract\Breach_Of_Contract\bin\WindowsGL\Debug\MonoGame.Framework.dll
+C:\Users\Tim\Desktop\Intelligent_Whale\Breach_Of_Contract\Breach_Of_Contract\bin\WindowsGL\Debug\OpenTK.dll
+C:\Users\Tim\Desktop\Intelligent_Whale\Breach_Of_Contract\Breach_Of_Contract\bin\WindowsGL\Debug\Tao.Sdl.dll
