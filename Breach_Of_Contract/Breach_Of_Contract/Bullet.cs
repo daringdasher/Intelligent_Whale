@@ -17,6 +17,7 @@ namespace Breach_Of_Contract
         protected Vector2 position;
         protected Rectangle bulletRect;
         protected float rotation;
+        public bool isActive;
 
         //Properties
         public Vector2 Position
@@ -34,7 +35,7 @@ namespace Breach_Of_Contract
         {
             position = new Vector2(0, 0);
             bulletRect = new Rectangle(0, 0, 64, 64);
-
+            isActive = false;
         }
         
         public void move(Vector2 dest)
@@ -43,7 +44,7 @@ namespace Breach_Of_Contract
             {
                 Vector2 vector = new Vector2(dest.X - position.X, dest.Y - position.Y);
                 Vector2 unitVector = Vector2.Normalize(vector);
-                Vector2 newPosition = new Vector2(position.X + unitVector.X * 2, position.Y + unitVector.Y * 2);
+                Vector2 newPosition = new Vector2(position.X + unitVector.X * 10, position.Y + unitVector.Y * 10);
                 position = newPosition;
                 bulletRect = new Rectangle((int)position.X - 16, (int)position.Y - 16, 64,64);
                 rotation = (float)Math.Atan2(vector.X, -vector.Y);

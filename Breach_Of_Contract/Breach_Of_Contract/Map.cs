@@ -48,10 +48,12 @@ namespace Breach_Of_Contract
         }
         public void createPlayer(int xPos, int yPos)
         {
-            objects.Add(new Player("blue", new Vector2(xPos-64, yPos)));
-            objects.Add(new Player("orange", new Vector2(xPos, yPos-64)));
-            objects.Add(new Player("brown", new Vector2(xPos+64, yPos)));
-            objects.Add(new Player("scott", new Vector2(xPos, yPos+64)));
+            Weapon pistol = new Weapon();
+            Weapon[] playerWeapons = {pistol};
+            objects.Add(new Player("blue",playerWeapons, new Vector2(xPos-64, yPos)));
+            objects.Add(new Player("orange", playerWeapons, new Vector2(xPos, yPos - 64)));
+            objects.Add(new Player("brown", playerWeapons, new Vector2(xPos + 64, yPos)));
+            objects.Add(new Player("scott", playerWeapons, new Vector2(xPos, yPos + 64)));
         }
         public void createEnemy(int xPos, int yPos)
         {

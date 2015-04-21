@@ -23,6 +23,7 @@ namespace Breach_Of_Contract
         protected bool isDead;
         protected Rectangle playerRect;
         protected float rotation;
+        public Vector2 destination;
 
         //Properties
         public Vector2 Position
@@ -37,18 +38,22 @@ namespace Breach_Of_Contract
         {
             get { return playerRect; }
         }
+        public Weapon[] Weapons
+        {
+            get { return weapons; }
+        }
         public float Rotation
         {
             get { return rotation; }
         }
         //Constructor
-        public Player(string identity, /*Weapon[] weaps,*/ Vector2 pos):base()
+        public Player(string identity, Weapon[] weaps, Vector2 pos):base()
         {
             health = 100;
             id = identity;
-            //weapons = weaps;
+            weapons = weaps;
             position = pos;
-            playerRect = new Rectangle(0, 0, 256, 256);
+            playerRect = new Rectangle(0, 0, 64, 64);
         }
         public void move(Vector2 dest)
         {
@@ -58,7 +63,7 @@ namespace Breach_Of_Contract
                 Vector2 unitVector = Vector2.Normalize(vector);
                 Vector2 newPosition = new Vector2(position.X + unitVector.X * 2, position.Y + unitVector.Y * 2);
                 position = newPosition;
-                playerRect = new Rectangle((int)position.X - 64, (int)position.Y - 64, 256, 256);
+                playerRect = new Rectangle((int)position.X - 32, (int)position.Y - 32, 64, 64);
                 rotation = (float)Math.Atan2(vector.X, -vector.Y);
             }
 
