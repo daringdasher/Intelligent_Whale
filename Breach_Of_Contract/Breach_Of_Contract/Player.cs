@@ -23,6 +23,7 @@ namespace Breach_Of_Contract
         protected bool isDead;
         protected Rectangle playerRect;
         protected float rotation;
+        public Vector2 destination;
 
         //Properties
         public Vector2 Position
@@ -37,16 +38,20 @@ namespace Breach_Of_Contract
         {
             get { return playerRect; }
         }
+        public Weapon[] Weapons
+        {
+            get { return weapons; }
+        }
         public float Rotation
         {
             get { return rotation; }
         }
         //Constructor
-        public Player(string identity, /*Weapon[] weaps,*/ Vector2 pos):base()
+        public Player(string identity, Weapon[] weaps, Vector2 pos):base()
         {
             health = 100;
             id = identity;
-            //weapons = weaps;
+            weapons = weaps;
             position = pos;
             playerRect = new Rectangle(0, 0, 64, 64);
         }
