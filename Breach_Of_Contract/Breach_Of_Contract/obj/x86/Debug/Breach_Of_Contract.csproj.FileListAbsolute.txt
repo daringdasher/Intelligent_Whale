@@ -48,3 +48,6 @@ C:\Users\Tim\Desktop\Intelligent_Whale\Breach_Of_Contract\Breach_Of_Contract\bin
 C:\Users\Tim\Desktop\Intelligent_Whale\Breach_Of_Contract\Breach_Of_Contract\bin\WindowsGL\Debug\MonoGame.Framework.dll
 C:\Users\Tim\Desktop\Intelligent_Whale\Breach_Of_Contract\Breach_Of_Contract\bin\WindowsGL\Debug\OpenTK.dll
 C:\Users\Tim\Desktop\Intelligent_Whale\Breach_Of_Contract\Breach_Of_Contract\bin\WindowsGL\Debug\Tao.Sdl.dll
+D:\GDAPS Proj\Breach_Of_Contract\Breach_Of_Contract\bin\WindowsGL\Debug\Content\Enemies\Enemy1.xnb
+D:\GDAPS Proj\Breach_Of_Contract\Breach_Of_Contract\bin\WindowsGL\Debug\Content\Enemies\Enemy2.xnb
+D:\GDAPS Proj\Breach_Of_Contract\Breach_Of_Contract\bin\WindowsGL\Debug\Content\Enemies\Enemy3.xnb
