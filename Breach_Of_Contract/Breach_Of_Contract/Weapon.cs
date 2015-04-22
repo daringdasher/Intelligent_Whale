@@ -15,15 +15,18 @@ namespace Breach_Of_Contract
         public double bulletsPerShot;  //Number of bullets fired each time the gun is shot
         public bool canFire;           //If the weapon can currently fire
         public double timeToNextShot;
+        public int damage;
+        public bool isActiveWeap;
 
         //Constructor;
-        public Weapon(double fr,double sp,double bps)
+        public Weapon(double fr,double sp,double bps,bool active)
         {
             fireRate = fr;
             spread = sp;
             bulletsPerShot = bps;
             canFire = true;
             timeToNextShot = fireRate;
+            isActiveWeap = active;
         }
         public Weapon()
         {
@@ -32,6 +35,7 @@ namespace Breach_Of_Contract
             bulletsPerShot = 1;
             canFire = true;
             timeToNextShot = fireRate;
+            isActiveWeap = true;
         }
         public void update()
         {

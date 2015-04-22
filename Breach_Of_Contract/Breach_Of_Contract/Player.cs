@@ -68,9 +68,18 @@ namespace Breach_Of_Contract
             }
 
         }
+        public void update(Vector2 destin)
+        {
+            move(destin);
+            Shoot();
+        }
         public override void Shoot()
         {
             throw new NotImplementedException();
+        }
+        public void SwitchWeapon()
+        {
+            if (weapons[0].isActiveWeap) { weapons[1].isActiveWeap = true; weapons[0].isActiveWeap = false; }
         }
     }
 }
