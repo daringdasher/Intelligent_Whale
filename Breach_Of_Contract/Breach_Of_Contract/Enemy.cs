@@ -20,12 +20,16 @@ namespace Breach_Of_Contract
         protected bool isBehindCover;
         protected bool isDead;
         protected Rectangle enemyRec;
-        protected float roataion;
+        protected float rotaion;
 
         //Properties
         public Vector2 Position
         {
             get { return position; }
+        }
+        public float Rotation
+        {
+            get { return rotaion; }
         }
         public Rectangle Rectangle
         {
@@ -55,7 +59,7 @@ namespace Breach_Of_Contract
                 Vector2 newPosition = new Vector2(position.X + unitVector.X * 1, position.Y + unitVector.Y * 1);
                 position = newPosition;
                 enemyRec = new Rectangle((int)position.X - 32, (int)position.Y - 32, 64, 64);
-                roataion = (float)Math.Atan2(vector.X, -vector.Y);
+                rotaion = (float)Math.Atan2(vector.X, -vector.Y);
             }
         }
     }

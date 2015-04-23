@@ -93,8 +93,8 @@ namespace Breach_Of_Contract
         }
         public void SwitchWeapon()
         {
-            if (weapons[0].isActiveWeap) { weapons[1].isActiveWeap = true; weapons[0].isActiveWeap = false; }
-            if (weapons[1].isActiveWeap) { weapons[0].isActiveWeap = true; weapons[1].isActiveWeap = false; }
+            if (weapons[0].isActiveWeap) { weapons[1].isActiveWeap = true; weapons[0].isActiveWeap = false; return; }
+            if (weapons[1].isActiveWeap) { weapons[0].isActiveWeap = true; weapons[1].isActiveWeap = false; return; }
         }
     }
 }

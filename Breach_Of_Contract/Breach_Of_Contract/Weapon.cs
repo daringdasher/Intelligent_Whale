@@ -45,7 +45,7 @@ namespace Breach_Of_Contract
             bulletsPerShot = 1;
             canFire = true;
             timeToNextShot = fireRate;
-            isActiveWeap = false;
+            isActiveWeap = true;
             for (int i = 0; i < bulletsPerShot; i++)
             {
                 bullets.Add(new Bullet());
