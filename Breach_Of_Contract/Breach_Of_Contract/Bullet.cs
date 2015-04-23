@@ -19,6 +19,7 @@ namespace Breach_Of_Contract
         protected float rotation;
         public bool isActive;
         public Vector2 destination;
+        public bool canDraw;
         //Properties
         public Vector2 Position
         {
@@ -41,6 +42,7 @@ namespace Breach_Of_Contract
             position = new Vector2(0, 0);
             bulletRect = new Rectangle(0, 0, 16, 16);
             isActive = false;
+            canDraw = false;
         }
         
         public void move()

@@ -73,10 +73,13 @@ namespace Breach_Of_Contract
                 {
                     if (bullets[i].isActive)
                     {
+                        bullets[i].canDraw = true;
                         bullets[i].move();
+                        Console.WriteLine("Active");
                     }
-                    if (!(bullets[i].isActive))
+                    else if(!(bullets[i].isActive))
                     {
+                        bullets[i].canDraw = false;
                         canFire = false;
                         bullets[i].isActive = true;
                         bullets[i].destination = endDest;
@@ -84,7 +87,7 @@ namespace Breach_Of_Contract
                         Vector2 vector = new Vector2(bullets[i].destination.X - bullets[i].Position.X, bullets[i].destination.Y - bullets[i].Position.Y);
                         Vector2 unitVector = Vector2.Normalize(vector);
                         bullets[i].Position = startPos - ((25*i) * unitVector);
-
+                        Console.WriteLine("InActive");
                     }
                     foreach (Enemy enemy in enems)
                     {
