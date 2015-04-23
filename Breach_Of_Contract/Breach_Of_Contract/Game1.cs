@@ -7,6 +7,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Storage;
 using Microsoft.Xna.Framework.GamerServices;
+using System.Threading;
 #endregion
 
 namespace Breach_Of_Contract
@@ -16,7 +17,7 @@ namespace Breach_Of_Contract
     /// </summary>
     public class Game1 : Game
     {
-        //Attributes
+        #region Attributes
         GraphicsDeviceManager graphics;
         Vector2 mousePosition;
         SpriteBatch spriteBatch;
@@ -52,12 +53,19 @@ namespace Breach_Of_Contract
         Bullet p2Bullet;
         Bullet p3Bullet;
         Bullet p4Bullet;
-        
+        Player[] players = new Player[4];
+        ScreenVariables gameVars;
+        List<Enemy> enemies = new List<Enemy>();
+        Texture2D hitbox;
+        #endregion
+
         //Constructor
         public Game1()
             : base()
         {
             graphics = new GraphicsDeviceManager(this);
+
+            //gameVars = new ScreenVariables(GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height, GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width);
             currentPlayer = "blue";
             p1Destination = new Vector2(0, 0);
             p2Destination = new Vector2(0, 0);
@@ -83,8 +91,8 @@ namespace Breach_Of_Contract
         {
             // TODO: Add your initialization logic here
             graphics.IsFullScreen = false;
-            graphics.PreferredBackBufferHeight = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height;
-            graphics.PreferredBackBufferWidth = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width;
+            //graphics.PreferredBackBufferHeight = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height;
+            //graphics.PreferredBackBufferWidth = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width;
             base.Initialize();
         }
 
@@ -100,6 +108,7 @@ namespace Breach_Of_Contract
             player2 = (Player)objectList[1]; brownSprite = Content.Load<Texture2D>("Players/Brown");
             player3 = (Player)objectList[2]; orangeSprite= Content.Load<Texture2D>("Players/Orange");
             player4 = (Player)objectList[3]; scottSprite = Content.Load<Texture2D>("Players/Scott");
+            hitbox = Content.Load<Texture2D>("HitBox");
             enemy1Sprite = Content.Load<Texture2D>("Enemies/Enemy1");
             enemy2Sprite = Content.Load<Texture2D>("Enemies/Enemy2");
             enemy3Sprite = Content.Load<Texture2D>("Enemies/Enemy3");
@@ -109,13 +118,18 @@ namespace Breach_Of_Contract
             p3Bullet = new Bullet();
             p4Bullet = new Bullet();
             rgen = new Random();
-            float enemyX = rgen.Next(0, 721);
-            float enemyY = rgen.Next(0, 1281);
+            float enemyY = rgen.Next(0, 721);
+            float enemyX = rgen.Next(0, 1281);
             testEnemy = new Enemy(new Vector2(enemyX, enemyY));
             foreach (object element in objectList)
             {
             }
-            
+            enemies.Add(testEnemy);
+
+            players[0] = player1;
+            players[1] = player2;
+            players[2] = player3;
+            players[3] = player4;
             // TODO: use this.Content to load your game content here
         }
 
@@ -140,44 +154,28 @@ namespace Breach_Of_Contract
 
             // TODO: Add your update logic here
             mousePosition = new Vector2(Mouse.GetState().X, Mouse.GetState().Y);
-            if (Mouse.GetState().LeftButton == ButtonState.Pressed) // move selected character with LMB
+            foreach (Player element in players)
             {
-                if (player1.ID == currentPlayer) { p1Destination = mousePosition; }
-                if (player2.ID == currentPlayer) { p2Destination = mousePosition; }
-                if (player3.ID == currentPlayer) { p3Destination = mousePosition; }
-                if (player4.ID == currentPlayer) { p4Destination = mousePosition; }
+                //Character Movement
+                if ((element.ID == currentPlayer) && (Mouse.GetState().LeftButton == ButtonState.Pressed)) { element.destination = mousePosition; }
+
+                //Character Switch
+                if ((element.PlayerRect.Contains(mousePosition)) && (Mouse.GetState().RightButton == ButtonState.Pressed)) { currentPlayer = element.ID; }
+
+                //Player Updating
+                element.update(testEnemy.Position, enemies);
+
+                //Weapon Switch
+                if ((element.ID == currentPlayer) && (Keyboard.GetState().IsKeyDown(Keys.Space))) { element.SwitchWeapon(); }
+
+
             }
-            if (Mouse.GetState().RightButton == ButtonState.Pressed) // select character with RMB
-            {
-                mousePosition = new Vector2(Mouse.GetState().X, Mouse.GetState().Y);
-                if (player1.PlayerRect.Contains(mousePosition)) {currentPlayer = player1.ID;}
-                if (player2.PlayerRect.Contains(mousePosition)) {currentPlayer = player2.ID;}
-                if (player3.PlayerRect.Contains(mousePosition)) {currentPlayer = player3.ID;}
-                if (player4.PlayerRect.Contains(mousePosition)) {currentPlayer = player4.ID;}
-            }
-            
-            if((Keyboard.GetState().IsKeyDown(Keys.Space)))
-            {
-
-                if (player1.ID == currentPlayer && player1.Weapons[0].canFire) { player1.Weapons[0].canFire=false; p1Bullet.isActive = true; p1Bullet.Position = player1.Position; bulletDest = testEnemy.Position; }
-                if (player2.ID == currentPlayer) { p2Bullet.Position = player2.Position; bulletDest = testEnemy.Position; }
-                if (player3.ID == currentPlayer) { p3Bullet.Position = player3.Position; bulletDest = testEnemy.Position; }
-                if (player4.ID == currentPlayer) { p4Bullet.Position = player1.Position; bulletDest = testEnemy.Position; }
-            }
-            
-            player1.move(p1Destination); player1Rot = player1.Rotation;
-            player2.move(p2Destination); player2Rot = player2.Rotation;
-            player3.move(p3Destination); player3Rot = player3.Rotation;
-            player4.move(p4Destination); player4Rot = player4.Rotation;
-            if (p1Bullet.isActive) p1Bullet.move(bulletDest); bulletRot = p1Bullet.Rotation;
-            if ((player1.Position.X > p1Destination.X - 1) && (player1.Position.X < p1Destination.X + 1) && (player1.Position.Y > p1Destination.Y - 1) && (player1.Position.Y < p1Destination.Y + 1)) p1Destination = new Vector2(0, 0);
-            if ((player2.Position.X > p2Destination.X - 1) && (player2.Position.X < p2Destination.X + 1) && (player2.Position.Y > p2Destination.Y - 1) && (player2.Position.Y < p2Destination.Y + 1)) p2Destination = new Vector2(0, 0);
-            if ((player3.Position.X > p3Destination.X - 1) && (player3.Position.X < p3Destination.X + 1) && (player3.Position.Y > p3Destination.Y - 1) && (player3.Position.Y < p3Destination.Y + 1)) p3Destination = new Vector2(0, 0);
-            if ((player4.Position.X > p4Destination.X - 1) && (player4.Position.X < p4Destination.X + 1) && (player4.Position.Y > p4Destination.Y - 1) && (player4.Position.Y < p4Destination.Y + 1)) p4Destination = new Vector2(0, 0);
-
-            player1.Weapons[0].update();
-
-
+            testEnemy.move(player4.Position);
+            enemies[0]=(testEnemy);
+            players[0] = player1;
+            players[1] = player2;
+            players[2] = player3;
+            players[3] = player4;
             base.Update(gameTime);
         }
 
@@ -191,15 +189,38 @@ namespace Breach_Of_Contract
             // TODO: Add your drawing code here
             spriteBatch.Begin();
             //if (startScreenActive) {(Draw Start Screen)}
-            spriteBatch.Draw(blueSprite, player1.Position, new Rectangle(0,0,256,256), Color.White, player1Rot, new Vector2(128, 128), .25f, SpriteEffects.None, 0F);
-            spriteBatch.Draw(blueSprite, player1.PlayerRect, Color.Black);
-            spriteBatch.Draw(brownSprite, player2.Position, new Rectangle(0, 0, 256, 256), Color.White, player2Rot, new Vector2(128, 128), .25f, SpriteEffects.None, 0F);
-            spriteBatch.Draw(orangeSprite, player3.Position, new Rectangle(0, 0, 256, 256), Color.White, player3Rot, new Vector2(128, 128), .25f, SpriteEffects.None, 0F);
-            spriteBatch.Draw(scottSprite, player4.Position, new Rectangle(0, 0, 256, 256), Color.White, player4Rot, new Vector2(128, 128), .25f, SpriteEffects.None, 0F);
-            
 
+
+
+            //Player Drawing
+            spriteBatch.Draw(blueSprite, player1.Position, new Rectangle(0,0,256,256), Color.White, player1.Rotation, new Vector2(128, 128), .25f, SpriteEffects.None, 0F);
+            spriteBatch.Draw(brownSprite, player2.Position, new Rectangle(0, 0, 256, 256), Color.White, player2.Rotation, new Vector2(128, 128), .25f, SpriteEffects.None, 0F);
+            spriteBatch.Draw(orangeSprite, player3.Position, new Rectangle(0, 0, 256, 256), Color.White, player3.Rotation, new Vector2(128, 128), .25f, SpriteEffects.None, 0F);
+            spriteBatch.Draw(scottSprite, player4.Position, new Rectangle(0, 0, 256, 256), Color.White, player4.Rotation, new Vector2(128, 128), .25f, SpriteEffects.None, 0F);
+            
+            //Enemy Drawing
             spriteBatch.Draw(enemy1Sprite, testEnemy.Position,new Rectangle(0, 0, 256, 256), Color.White, bulletRot - 180, new Vector2(128, 128), .25f, SpriteEffects.None, 0F);
-            spriteBatch.Draw(bulletSprite, p1Bullet.Position, new Rectangle(0, 0, 64, 64), Color.White, bulletRot, new Vector2(32, 32), .5f, SpriteEffects.None, 0F);
+
+            //Bullet Drawing
+            foreach (Player wElement in players)
+            {
+                if (wElement.Weapons[0].isActiveWeap) 
+                {
+                    foreach (Bullet bElement in wElement.Weapons[0].bullets)
+                    {
+                        if (bElement.isActive)
+                        {
+                            spriteBatch.Draw(bulletSprite, bElement.Position, new Rectangle(0, 0, 64, 64), Color.White, bElement.Rotation, new Vector2(32, 32), .5f, SpriteEffects.None, 0F);
+                        }
+                    }
+                }
+            }
+            spriteBatch.Draw(hitbox, testEnemy.Position, new Rectangle(0, 0, 256, 256), Color.White, player1.Rotation, new Vector2(128, 128), .25f, SpriteEffects.None, 0F);
+            spriteBatch.Draw(hitbox, player1.Position, new Rectangle(0, 0, 256, 256), Color.White, player1.Rotation, new Vector2(128, 128), .25f, SpriteEffects.None, 0F);
+            spriteBatch.Draw(hitbox, player2.Rectangle, Color.White);
+            spriteBatch.Draw(hitbox, player3.Rectangle, Color.White);
+            spriteBatch.Draw(hitbox, player4.Rectangle, Color.White);
+
             spriteBatch.End();
             base.Draw(gameTime);
         }

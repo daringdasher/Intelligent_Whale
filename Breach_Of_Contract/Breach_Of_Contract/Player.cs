@@ -24,7 +24,6 @@ namespace Breach_Of_Contract
         protected Rectangle playerRect;
         protected float rotation;
         public Vector2 destination;
-
         //Properties
         public Vector2 Position
         {
@@ -51,15 +50,19 @@ namespace Breach_Of_Contract
         {
             health = 100;
             id = identity;
-            weapons = weaps;
-            position = pos;
-            playerRect = new Rectangle(0, 0, 64, 64);
-        }
-        public void move(Vector2 dest)
-        {
-            if (dest != Vector2.Zero)
+            weapons = new Weapon[weaps.Length];
+            for(int i = 0; i < weaps.Length; i++)
             {
-                Vector2 vector = new Vector2(dest.X - position.X, dest.Y - position.Y);
+                weapons[i] = weaps[i];
+            }
+            position = pos;
+            playerRect = new Rectangle((int)position.X-32, (int)position.Y-32, 64, 64);
+        }
+        public void move()
+        {
+            if (destination != Vector2.Zero)
+            {
+                Vector2 vector = new Vector2(destination.X - position.X, destination.Y - position.Y);
                 Vector2 unitVector = Vector2.Normalize(vector);
                 Vector2 newPosition = new Vector2(position.X + unitVector.X * 2, position.Y + unitVector.Y * 2);
                 position = newPosition;
@@ -68,18 +71,30 @@ namespace Breach_Of_Contract
             }
 
         }
-        public void update(Vector2 destin)
+
+        public void update( Vector2 bulletDestination,List<Enemy> enems)
         {
-            move(destin);
-            Shoot();
+            if ((position.X > destination.X - 1) && (position.X < destination.X + 1) && (position.Y > destination.Y - 1) && (position.Y < destination.Y + 1)) destination = new Vector2(0, 0);
+            move();
+            Shoot(bulletDestination,enems);
         }
-        public override void Shoot()
+        public override void Shoot(Vector2 bulletDest, List<Player> target) { }
+
+        public override void Shoot(Vector2 bulletDest, List<Enemy> enemies)
         {
-            throw new NotImplementedException();
+            //Rotate to shoot
+            Vector2 vector = new Vector2(bulletDest.X - position.X, bulletDest.Y - position.Y);
+            rotation = (float)Math.Atan2(vector.X, -vector.Y);
+            foreach (Weapon element in weapons)
+            {
+                element.update();
+                element.Shoot(position, bulletDest,enemies);
+            }
         }
         public void SwitchWeapon()
         {
             if (weapons[0].isActiveWeap) { weapons[1].isActiveWeap = true; weapons[0].isActiveWeap = false; }
+            if (weapons[1].isActiveWeap) { weapons[0].isActiveWeap = true; weapons[1].isActiveWeap = false; }
         }
     }
 }

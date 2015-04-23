@@ -20,11 +20,16 @@ namespace Breach_Of_Contract
         protected bool isBehindCover;
         protected bool isDead;
         protected Rectangle enemyRec;
+        protected float roataion;
 
         //Properties
         public Vector2 Position
         {
             get { return position; }
+        }
+        public Rectangle Rectangle
+        {
+            get { return enemyRec; }
         }
 
         //Constructor
@@ -33,11 +38,25 @@ namespace Breach_Of_Contract
             health = 100;
             //weapons = weaps;
             position = pos;
-            enemyRec = new Rectangle(10, 10, 16, 16);
+            enemyRec = new Rectangle((int)position.X-32, (int)position.Y-32, 16, 16);
         }
-        public override void Shoot()
+        public override void Shoot(Vector2 bulletDest, List<Enemy> target) { }
+
+        public override void Shoot(Vector2 bulletDest, List<Player> player)
         {
             throw new NotImplementedException();
+        }
+        public void move(Vector2 dest)
+        {
+            if (dest != Vector2.Zero)
+            {
+                Vector2 vector = new Vector2(dest.X - position.X, dest.Y - position.Y);
+                Vector2 unitVector = Vector2.Normalize(vector);
+                Vector2 newPosition = new Vector2(position.X + unitVector.X * 1, position.Y + unitVector.Y * 1);
+                position = newPosition;
+                enemyRec = new Rectangle((int)position.X - 32, (int)position.Y - 32, 64, 64);
+                roataion = (float)Math.Atan2(vector.X, -vector.Y);
+            }
         }
     }
 }

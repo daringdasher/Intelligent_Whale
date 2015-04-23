@@ -18,7 +18,7 @@ namespace Breach_Of_Contract
         protected Rectangle bulletRect;
         protected float rotation;
         public bool isActive;
-
+        public Vector2 destination;
         //Properties
         public Vector2 Position
         {
@@ -30,26 +30,38 @@ namespace Breach_Of_Contract
         {
             get { return rotation; }
         }
+
+        public Rectangle BulletRect
+        {
+            get { return bulletRect; }
+        }
         //Constructor
         public Bullet()
         {
             position = new Vector2(0, 0);
-            bulletRect = new Rectangle(0, 0, 64, 64);
+            bulletRect = new Rectangle(0, 0, 16, 16);
             isActive = false;
         }
         
-        public void move(Vector2 dest)
+        public void move()
         {
-            if (dest != Vector2.Zero)
+            if (destination != Vector2.Zero)
             {
-                Vector2 vector = new Vector2(dest.X - position.X, dest.Y - position.Y);
+                Vector2 vector = new Vector2(destination.X - position.X, destination.Y - position.Y);
                 Vector2 unitVector = Vector2.Normalize(vector);
-                Vector2 newPosition = new Vector2(position.X + unitVector.X * 10, position.Y + unitVector.Y * 10);
+                Vector2 newPosition = new Vector2(position.X + unitVector.X * 2, position.Y + unitVector.Y * 2);
                 position = newPosition;
-                bulletRect = new Rectangle((int)position.X - 16, (int)position.Y - 16, 64,64);
+                bulletRect = new Rectangle((int)position.X - 4, (int)position.Y - 4, 16,16);
                 rotation = (float)Math.Atan2(vector.X, -vector.Y);
-            }
+                if ((position.X > destination.X - 1) && (position.X < destination.X + 1) && (position.Y > destination.Y - 1) && (position.Y < destination.Y + 1)) { destination = new Vector2(0, 0); isActive = false; }
 
+            }
+            if (bulletRect.Center.Y < 0 || bulletRect.Center.Y > 720||bulletRect.Center.X<0||bulletRect.Center.X>1280) { destination = new Vector2(0, 0); isActive = false; }
+        }
+        public void Collision(Enemy target)
+        {
+            if (bulletRect.Intersects(target.Rectangle)) { 
+                isActive = false; destination = new Vector2(0,0);}
         }
     }
 }

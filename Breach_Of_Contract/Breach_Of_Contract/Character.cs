@@ -16,17 +16,31 @@ namespace Breach_Of_Contract
     abstract class Character
     {
         //Attributes
-        protected int health;
+        protected Weapon weapon;
         protected Vector2 position;
+        protected int health;
         protected bool isBehindCover;
         protected bool isDead;
+        protected Rectangle rect;
+        protected float roataion;
 
+        //Properties
+        public Vector2 Position
+        {
+            get { return position; }
+        }
+        public Rectangle Rectangle
+        {
+            get { return rect; }
+        }
         //Constructor
         public Character()
         {
         }
     
         //Methods
-        public abstract void Shoot();
+        public abstract void Shoot(Vector2 bulletDest, List<Enemy> target);
+        public abstract void Shoot(Vector2 bulletDest, List<Player> target);
+
     }
 }
