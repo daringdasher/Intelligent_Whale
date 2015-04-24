@@ -56,6 +56,8 @@ namespace Breach_Of_Contract
         Player[] players = new Player[4];
         ScreenVariables gameVars;
         List<Enemy> enemies = new List<Enemy>();
+        List<Enemy> enemiesAlive = new List<Enemy>();
+
         Texture2D hitbox;
         #endregion
 
@@ -181,7 +183,8 @@ namespace Breach_Of_Contract
                 }
 
                 //Player Updating
-                element.update(closestEnemy.Position, enemies);
+                element.update(closestEnemy.Position, enemies,out enemiesAlive);
+                enemies = enemiesAlive;
             }
             //testEnemy.move(player4.Position);
             //enemies[0]=(testEnemy);

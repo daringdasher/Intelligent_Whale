@@ -65,8 +65,13 @@ namespace Breach_Of_Contract
 
         }
 
-        internal void Shoot(Vector2 startPos, Vector2 endDest, List<Enemy> enems)
+        internal void Shoot(Vector2 startPos, Vector2 endDest, List<Enemy> enems,out List<Enemy> enemiesStillAlive)
         {
+            enemiesStillAlive = new List<Enemy>();
+            foreach (Enemy e in enems)
+            {
+                enemiesStillAlive.Add(e);
+            }
             if (canFire&&isActiveWeap)
             {
                 for (int i = 0; i < bullets.Count;i++ )
@@ -91,7 +96,9 @@ namespace Breach_Of_Contract
                     }
                     foreach (Enemy enemy in enems)
                     {
-                        bullets[i].Collision(enemy);
+                        bool hit;
+                        bullets[i].Collision(enemy,out hit);
+                        if (hit) { enemiesStillAlive.Remove(enemy); }
                     }
 
                 }

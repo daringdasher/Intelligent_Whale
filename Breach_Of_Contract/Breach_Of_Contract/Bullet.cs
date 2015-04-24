@@ -60,10 +60,12 @@ namespace Breach_Of_Contract
             }
             if (bulletRect.Center.Y < 0 || bulletRect.Center.Y > 720||bulletRect.Center.X<0||bulletRect.Center.X>1280) { destination = new Vector2(0, 0); isActive = false; }
         }
-        public void Collision(Enemy target)
+        public void Collision(Enemy target,out bool hit)
         {
-            if (bulletRect.Intersects(target.Rectangle)) { 
-                isActive = false; destination = new Vector2(0,0);}
+            if (bulletRect.Intersects(target.Rectangle)&&isActive) {
+                isActive = false; destination = new Vector2(0, 0); hit= true;
+            }
+            else hit = false;
         }
     }
 }

@@ -42,9 +42,9 @@ namespace Breach_Of_Contract
             health = 100;
             //weapons = weaps;
             position = pos;
-            enemyRec = new Rectangle((int)position.X-32, (int)position.Y-32, 16, 16);
+            enemyRec = new Rectangle((int)position.X-32, (int)position.Y-32, 64, 64);
         }
-        public override void Shoot(Vector2 bulletDest, List<Enemy> target) { }
+        public override void Shoot(Vector2 bulletDest, List<Enemy> target, out List<Enemy> enemiesStillAlive) { enemiesStillAlive = new List<Enemy>(); }
 
         public override void Shoot(Vector2 bulletDest, List<Player> player)
         {
