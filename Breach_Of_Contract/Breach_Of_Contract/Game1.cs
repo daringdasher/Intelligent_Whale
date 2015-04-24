@@ -57,6 +57,8 @@ namespace Breach_Of_Contract
         ScreenVariables gameVars;
         List<Enemy> enemies = new List<Enemy>();
         List<Enemy> enemiesAlive = new List<Enemy>();
+        //Changes
+
 
         //THESE ARE CHANGES
         Texture2D mainMenu;
