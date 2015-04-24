@@ -92,6 +92,9 @@
     <None Include="Content\HitBox.xnb">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="Content\MainMenu.xnb">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="Content\Players\Blue.xnb">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

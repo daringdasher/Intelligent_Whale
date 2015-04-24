@@ -58,6 +58,8 @@ namespace Breach_Of_Contract
         List<Enemy> enemies = new List<Enemy>();
         List<Enemy> enemiesAlive = new List<Enemy>();
 
+        //THESE ARE CHANGES
+        Texture2D mainMenu;
         Texture2D hitbox;
         #endregion
 
