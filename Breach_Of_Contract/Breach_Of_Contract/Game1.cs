@@ -58,12 +58,15 @@ namespace Breach_Of_Contract
         List<Enemy> enemies = new List<Enemy>();
         List<Enemy> enemiesAlive = new List<Enemy>();
         //Changes
-
+        // added enum 
+        Menus menuToggle = Menus.Main;
 
         //THESE ARE CHANGES
         Texture2D mainMenu;
         Texture2D hitbox;
         #endregion
+        // enum for use in toggling menus/states
+        public enum Menus { Main, Play, HighScore, Options, Exit }
 
         //Constructor
         public Game1()
@@ -84,7 +87,7 @@ namespace Breach_Of_Contract
             graphics.PreferredBackBufferHeight = 720;
             graphics.PreferredBackBufferWidth = 1280;
             map = new Map();
-            objectList = map.LoadMap("test.txt");
+            objectList = map.LoadMap("test.txt");            
         }
 
         /// <summary>
@@ -119,6 +122,8 @@ namespace Breach_Of_Contract
             enemy2Sprite = Content.Load<Texture2D>("Enemies/Enemy2");
             enemy3Sprite = Content.Load<Texture2D>("Enemies/Enemy3");
             bulletSprite = Content.Load<Texture2D>("Bullet");
+            // added gave mainMenu attribute reference to correct file
+            mainMenu = Content.Load<Texture2D>("MainMenu");
             p1Bullet = new Bullet();
             p2Bullet = new Bullet();
             p3Bullet = new Bullet();
@@ -162,6 +167,7 @@ namespace Breach_Of_Contract
                 Exit();
 
             // TODO: Add your update logic here
+            
             mousePosition = new Vector2(Mouse.GetState().X, Mouse.GetState().Y);
             foreach (Player element in players)
             {
@@ -199,43 +205,50 @@ namespace Breach_Of_Contract
             base.Update(gameTime);
         }
 
+        
+        
         /// <summary>
         /// This is called when the game should draw itself.
         /// </summary>
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.CornflowerBlue);
             // TODO: Add your drawing code here
             spriteBatch.Begin();
-            //if (startScreenActive) {(Draw Start Screen)}
-
-
-
-            //Player Drawing
-            spriteBatch.Draw(blueSprite, player1.Position, new Rectangle(0,0,256,256), Color.White, player1.Rotation, new Vector2(128, 128), .25f, SpriteEffects.None, 0F);
-            spriteBatch.Draw(brownSprite, player2.Position, new Rectangle(0, 0, 256, 256), Color.White, player2.Rotation, new Vector2(128, 128), .25f, SpriteEffects.None, 0F);
-            spriteBatch.Draw(orangeSprite, player3.Position, new Rectangle(0, 0, 256, 256), Color.White, player3.Rotation, new Vector2(128, 128), .25f, SpriteEffects.None, 0F);
-            spriteBatch.Draw(scottSprite, player4.Position, new Rectangle(0, 0, 256, 256), Color.White, player4.Rotation, new Vector2(128, 128), .25f, SpriteEffects.None, 0F);
-            
-            //Enemy Drawing
-            foreach (Enemy enem in enemies)
+            //if (startScreenActive) {(Draw Start Screen)} // leaving this untouched incase we need it later on
+            // Menu Drawing 
+            if (menuToggle == Menus.Main)
             {
-                spriteBatch.Draw(enemy1Sprite, enem.Position, new Rectangle(0, 0, 256, 256), Color.White, bulletRot, new Vector2(128, 128), .25f, SpriteEffects.None, 0F);
-                spriteBatch.Draw(hitbox, enem.Position, new Rectangle(0, 0, 256, 256), Color.White, enem.Rotation, new Vector2(128, 128), .25f, SpriteEffects.None, 0F);
-
+                GraphicsDevice.Clear(Color.CornflowerBlue);
+                spriteBatch.Draw(mainMenu, new Rectangle(0, 0, 1280, 720), Color.White);
             }
 
-            //Bullet Drawing
-            foreach (Player wElement in players)
-            {
-                if (wElement.Weapons[0].isActiveWeap) 
+            if (menuToggle == Menus.Play)
+            {//Player Drawing
+                spriteBatch.Draw(blueSprite, player1.Position, new Rectangle(0, 0, 256, 256), Color.White, player1.Rotation, new Vector2(128, 128), .25f, SpriteEffects.None, 0F);
+                spriteBatch.Draw(brownSprite, player2.Position, new Rectangle(0, 0, 256, 256), Color.White, player2.Rotation, new Vector2(128, 128), .25f, SpriteEffects.None, 0F);
+                spriteBatch.Draw(orangeSprite, player3.Position, new Rectangle(0, 0, 256, 256), Color.White, player3.Rotation, new Vector2(128, 128), .25f, SpriteEffects.None, 0F);
+                spriteBatch.Draw(scottSprite, player4.Position, new Rectangle(0, 0, 256, 256), Color.White, player4.Rotation, new Vector2(128, 128), .25f, SpriteEffects.None, 0F);
+
+                //Enemy Drawing
+                foreach (Enemy enem in enemies)
                 {
-                    foreach (Bullet bElement in wElement.Weapons[0].bullets)
+                    spriteBatch.Draw(enemy1Sprite, enem.Position, new Rectangle(0, 0, 256, 256), Color.White, bulletRot, new Vector2(128, 128), .25f, SpriteEffects.None, 0F);
+                    spriteBatch.Draw(hitbox, enem.Position, new Rectangle(0, 0, 256, 256), Color.White, enem.Rotation, new Vector2(128, 128), .25f, SpriteEffects.None, 0F);
+
+                }
+
+                //Bullet Drawing
+                foreach (Player wElement in players)
+                {
+                    if (wElement.Weapons[0].isActiveWeap)
                     {
-                        if (bElement.canDraw)
+                        foreach (Bullet bElement in wElement.Weapons[0].bullets)
                         {
-                            spriteBatch.Draw(bulletSprite, bElement.Position, new Rectangle(0, 0, 64, 64), Color.White, bElement.Rotation, new Vector2(32, 32), .5f, SpriteEffects.None, 0F);
+                            if (bElement.canDraw)
+                            {
+                                spriteBatch.Draw(bulletSprite, bElement.Position, new Rectangle(0, 0, 64, 64), Color.White, bElement.Rotation, new Vector2(32, 32), .5f, SpriteEffects.None, 0F);
+                            }
                         }
                     }
                 }

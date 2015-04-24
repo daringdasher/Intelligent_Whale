@@ -5,7 +5,9 @@ using System.Text;
 
 namespace Breach_Of_Contract
 {
-    class MainMenu:Menu
+    class MainMenu : Menu
     {
+        
+        
     }
 }

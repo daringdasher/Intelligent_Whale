@@ -41,3 +41,8 @@ D:\Users\mxd2278\Documents\GDAPS Proj\Breach_Of_Contract\Breach_Of_Contract\bin\
 D:\Users\mxd2278\Documents\GDAPS Proj\Breach_Of_Contract\Breach_Of_Contract\bin\WindowsGL\Debug\Tao.Sdl.dll
 D:\Users\mxd2278\Documents\GDAPS Proj\Breach_Of_Contract\Breach_Of_Contract\obj\x86\Debug\Breach_Of_Contract.csprojResolveAssemblyReference.cache
 D:\GDAPS Proj\Breach_Of_Contract\Breach_Of_Contract\bin\WindowsGL\Debug\Content\MainMenu.xnb
+C:\Users\Tim\Desktop\Intelligent_Whale\Breach_Of_Contract\Breach_Of_Contract\obj\x86\Debug\Breach_Of_Contract.exe
+C:\Users\Tim\Desktop\Intelligent_Whale\Breach_Of_Contract\Breach_Of_Contract\obj\x86\Debug\Breach_Of_Contract.pdb
+C:\Users\Tim\Desktop\Intelligent_Whale\Breach_Of_Contract\Breach_Of_Contract\obj\x86\Debug\Breach_Of_Contract.csprojResolveAssemblyReference.cache
+J:\Intelligent_Whale\Breach_Of_Contract\Breach_Of_Contract\obj\x86\Debug\Breach_Of_Contract.exe
+J:\Intelligent_Whale\Breach_Of_Contract\Breach_Of_Contract\obj\x86\Debug\Breach_Of_Contract.pdb
