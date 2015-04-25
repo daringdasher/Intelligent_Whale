@@ -64,6 +64,9 @@ namespace Breach_Of_Contract
         //THESE ARE CHANGES
         Texture2D mainMenu;
         Texture2D hitbox;
+
+        // rectangle for use as play button
+        Rectangle playButton;
         #endregion
         // enum for use in toggling menus/states
         public enum Menus { Main, Play, HighScore, Options, Exit }
@@ -87,7 +90,10 @@ namespace Breach_Of_Contract
             graphics.PreferredBackBufferHeight = 720;
             graphics.PreferredBackBufferWidth = 1280;
             map = new Map();
-            objectList = map.LoadMap("test.txt");            
+            objectList = map.LoadMap("test.txt"); 
+            
+            // NEW - initialize the playButton 
+            playButton = new Rectangle(565, 355, 151, 33);
         }
 
         /// <summary>
@@ -167,7 +173,14 @@ namespace Breach_Of_Contract
                 Exit();
 
             // TODO: Add your update logic here
-            
+            if (menuToggle == Menus.Main)
+            {
+                if (Mouse.GetState().Position.X > 565 && Mouse.GetState().Position.X < 716 
+                    && Mouse.GetState().Position.Y > 355 && Mouse.GetState().Position.Y < 398 && Mouse.GetState().LeftButton == ButtonState.Pressed)
+                {
+                    menuToggle = Menus.Play;
+                }
+            }
             mousePosition = new Vector2(Mouse.GetState().X, Mouse.GetState().Y);
             foreach (Player element in players)
             {
@@ -216,6 +229,7 @@ namespace Breach_Of_Contract
             // TODO: Add your drawing code here
             spriteBatch.Begin();
             //if (startScreenActive) {(Draw Start Screen)} // leaving this untouched incase we need it later on
+            
             // Menu Drawing 
             if (menuToggle == Menus.Main)
             {
@@ -224,7 +238,11 @@ namespace Breach_Of_Contract
             }
 
             if (menuToggle == Menus.Play)
-            {//Player Drawing
+            {
+                // clear screen of main menu
+                GraphicsDevice.Clear(Color.CornflowerBlue);
+
+                //Player Drawing
                 spriteBatch.Draw(blueSprite, player1.Position, new Rectangle(0, 0, 256, 256), Color.White, player1.Rotation, new Vector2(128, 128), .25f, SpriteEffects.None, 0F);
                 spriteBatch.Draw(brownSprite, player2.Position, new Rectangle(0, 0, 256, 256), Color.White, player2.Rotation, new Vector2(128, 128), .25f, SpriteEffects.None, 0F);
                 spriteBatch.Draw(orangeSprite, player3.Position, new Rectangle(0, 0, 256, 256), Color.White, player3.Rotation, new Vector2(128, 128), .25f, SpriteEffects.None, 0F);
