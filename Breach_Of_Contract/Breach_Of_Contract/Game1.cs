@@ -265,6 +265,7 @@ namespace Breach_Of_Contract
                         {
                             if (bElement.canDraw)
                             {
+
                                 spriteBatch.Draw(bulletSprite, bElement.Position, new Rectangle(0, 0, 64, 64), Color.White, bElement.Rotation, new Vector2(32, 32), .5f, SpriteEffects.None, 0F);
                             }
                         }
