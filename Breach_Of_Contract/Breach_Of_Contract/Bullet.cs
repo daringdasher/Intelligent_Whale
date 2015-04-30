@@ -40,7 +40,7 @@ namespace Breach_Of_Contract
         public Bullet()
         {
             position = new Vector2(0, 0);
-            bulletRect = new Rectangle(0, 0, 16, 16);
+            bulletRect = new Rectangle(1, 1, 16, 16);
             isActive = false;
             canDraw = false;
         }
