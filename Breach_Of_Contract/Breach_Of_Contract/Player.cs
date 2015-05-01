@@ -72,24 +72,30 @@ namespace Breach_Of_Contract
 
         }
 
-        public void update( Vector2 bulletDestination,List<Enemy> enems, out List<Enemy> enemsStillAlive)
+        public void update( Vector2 bulletDestination,List<Enemy> enems)
         {
             if ((position.X > destination.X - 1) && (position.X < destination.X + 1) && (position.Y > destination.Y - 1) && (position.Y < destination.Y + 1)) destination = new Vector2(0, 0);
             move();
-            Shoot(bulletDestination,enems,out enemsStillAlive);
+            Shoot(bulletDestination, enems);
+           
         }
+
         public override void Shoot(Vector2 bulletDest, List<Player> target) { }
 
-        public override void Shoot(Vector2 bulletDest, List<Enemy> enemies,out List<Enemy>enemiesStillAlive)
+        public override void Shoot(Vector2 bulletDest, List<Enemy> enemies)
         {
-            enemiesStillAlive = new List<Enemy>();
+            
             //Rotate to shoot
             Vector2 vector = new Vector2(bulletDest.X - position.X, bulletDest.Y - position.Y);
             rotation = (float)Math.Atan2(vector.X, -vector.Y);
             foreach (Weapon element in weapons)
             {
-                element.update();
-                element.Shoot(position, bulletDest,enemies,out enemiesStillAlive);
+                if (element.isActiveWeap)
+                {
+                    element.update();
+                    element.Shoot(position, bulletDest,enemies);
+                }
+               
             }
         }
         public void SwitchWeapon()

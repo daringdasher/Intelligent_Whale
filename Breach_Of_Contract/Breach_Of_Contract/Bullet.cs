@@ -35,6 +35,7 @@ namespace Breach_Of_Contract
         public Rectangle BulletRect
         {
             get { return bulletRect; }
+            set { bulletRect = value; }
         }
         //Constructor
         public Bullet()
@@ -51,11 +52,11 @@ namespace Breach_Of_Contract
             {
                 Vector2 vector = new Vector2(destination.X - position.X, destination.Y - position.Y);
                 Vector2 unitVector = Vector2.Normalize(vector);
-                Vector2 newPosition = new Vector2(position.X + unitVector.X * 2, position.Y + unitVector.Y * 2);
+                Vector2 newPosition = new Vector2(position.X + unitVector.X * 6, position.Y + unitVector.Y * 6);
                 position = newPosition;
                 bulletRect = new Rectangle((int)position.X - 4, (int)position.Y - 4, 16,16);
                 rotation = (float)Math.Atan2(vector.X, -vector.Y);
-                if ((position.X > destination.X - 1) && (position.X < destination.X + 1) && (position.Y > destination.Y - 1) && (position.Y < destination.Y + 1)) { destination = new Vector2(0, 0); isActive = false; }
+                if ((position.X > destination.X - 3) && (position.X < destination.X + 3) && (position.Y > destination.Y - 3) && (position.Y < destination.Y + 3)) { destination = new Vector2(0, 0); isActive = false; }
 
             }
             if (bulletRect.Center.Y < 0 || bulletRect.Center.Y > 720||bulletRect.Center.X<0||bulletRect.Center.X>1280) { destination = new Vector2(0, 0); isActive = false; }
@@ -63,7 +64,7 @@ namespace Breach_Of_Contract
         public void Collision(Enemy target,out bool hit)
         {
             if (bulletRect.Intersects(target.Rectangle)&&isActive) {
-                isActive = false; destination = new Vector2(0, 0); hit= true;
+                isActive = false; destination = new Vector2(0, 0); hit = true; canDraw = false;
             }
             else hit = false;
         }

@@ -53,31 +53,28 @@ namespace Breach_Of_Contract
         }
         public void update()
         {
+
+            if ((!(canFire))&&timeToNextShot > 0)
+            {
+                timeToNextShot = (timeToNextShot - (1 / 60.0));
+            }
             if (timeToNextShot <= 0)
             {
                 canFire = true;
                 timeToNextShot = fireRate;
             }
-            if ((!(canFire))&&timeToNextShot > 0)
-            {
-                timeToNextShot = (timeToNextShot - (1 / 60.0));
-            }
-
         }
 
-        internal void Shoot(Vector2 startPos, Vector2 endDest, List<Enemy> enems,out List<Enemy> enemiesStillAlive)
+        internal void Shoot(Vector2 startPos, Vector2 endDest, List<Enemy> enems)
         {
-            enemiesStillAlive = new List<Enemy>();
-            foreach (Enemy e in enems)
-            {
-                enemiesStillAlive.Add(e);
-            }
+
             if (canFire&&isActiveWeap)
             {
                 for (int i = 0; i < bullets.Count;i++ )
                 {
                     if (bullets[i].isActive)
                     {
+
                         bullets[i].canDraw = true;
                         bullets[i].move();
                         Console.WriteLine("Active");
@@ -89,6 +86,7 @@ namespace Breach_Of_Contract
                         bullets[i].isActive = true;
                         bullets[i].destination = endDest;
                         bullets[i].Position = startPos;
+                        bullets[i].BulletRect = new Rectangle((int)startPos.X, (int)startPos.Y, 16, 16);
                         Vector2 vector = new Vector2(bullets[i].destination.X - bullets[i].Position.X, bullets[i].destination.Y - bullets[i].Position.Y);
                         Vector2 unitVector = Vector2.Normalize(vector);
                         bullets[i].Position = startPos - ((25*i) * unitVector);
@@ -98,7 +96,7 @@ namespace Breach_Of_Contract
                     {
                         bool hit;
                         bullets[i].Collision(enemy,out hit);
-                        if (hit) { enemiesStillAlive.Remove(enemy); }
+                        if (hit) { enemy.IsDead = false; }
                     }
 
                 }

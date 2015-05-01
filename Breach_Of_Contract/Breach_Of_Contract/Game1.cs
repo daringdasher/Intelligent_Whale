@@ -58,6 +58,7 @@ namespace Breach_Of_Contract
         List<Enemy> enemies = new List<Enemy>();
         List<Enemy> enemiesAlive = new List<Enemy>();
         List<Cover> covers = new List<Cover>();
+        MouseState previousMS;
         //Changes
         // added enum 
         Menus menuToggle = Menus.Main;
@@ -91,7 +92,8 @@ namespace Breach_Of_Contract
             graphics.PreferredBackBufferHeight = 720;
             graphics.PreferredBackBufferWidth = 1280;
             map = new Map();
-            objectList = map.LoadMap("test.txt"); 
+            objectList = map.LoadMap("test.txt");
+            previousMS = Mouse.GetState();
             
             // NEW - initialize the playButton 
             playButton = new Rectangle(565, 355, 151, 33);
@@ -136,16 +138,12 @@ namespace Breach_Of_Contract
             p3Bullet = new Bullet();
             p4Bullet = new Bullet();
             rgen = new Random();
-            for (int i = 0; i <= 4;i++ )
-            {
-                float enemyY = rgen.Next(0, 721);
-                float enemyX = rgen.Next(0, 1281);
-                enemies.Add(new Enemy(new Vector2(enemyX, enemyY)));
-            }
             foreach (object o in objectList)
             {
                 if (o is Cover) { covers.Add((Cover)o); }
+                if (o is Enemy) { enemies.Add((Enemy)o); }
             }
+            
             //enemies.Add(testEnemy);
 
             players[0] = player1;
@@ -178,46 +176,53 @@ namespace Breach_Of_Contract
             if (menuToggle == Menus.Main)
             {
                 if (Mouse.GetState().Position.X > 565 && Mouse.GetState().Position.X < 716 
-                    && Mouse.GetState().Position.Y > 355 && Mouse.GetState().Position.Y < 398 && Mouse.GetState().LeftButton == ButtonState.Pressed)
+                    && Mouse.GetState().Position.Y > 355 && Mouse.GetState().Position.Y < 398 && Mouse.GetState().LeftButton == ButtonState.Released && previousMS.LeftButton == ButtonState.Pressed)
                 {
                     menuToggle = Menus.Play;
                 }
             }
-            mousePosition = new Vector2(Mouse.GetState().X, Mouse.GetState().Y);
-            foreach (Player element in players)
+            if (menuToggle == Menus.Play) 
             {
-                //Character Movement
-                if ((element.ID == currentPlayer) && (Mouse.GetState().LeftButton == ButtonState.Pressed)) { element.destination = mousePosition; }
-
-                //Character Switch
-                if ((element.PlayerRect.Contains(mousePosition)) && (Mouse.GetState().RightButton == ButtonState.Pressed)) { currentPlayer = element.ID; }
-
-                
-
-                //Weapon Switch
-                if ((element.ID == currentPlayer) && (Keyboard.GetState().IsKeyDown(Keys.Space))) { element.SwitchWeapon(); }
-
-                //Determine Closest Enemy
-                Enemy closestEnemy = testEnemy;
-                float smallestDist = 10000;
-                foreach (Enemy enem in enemies)
+                mousePosition = new Vector2(Mouse.GetState().X, Mouse.GetState().Y);
+                foreach (Player element in players)
                 {
-                    float dist = Vector2.Distance(element.Position,enem.Position);
-                    if (dist < smallestDist) { smallestDist = dist; closestEnemy = enem; }
-                
+                    //Character Movement
+                    if ((element.ID == currentPlayer) && (Mouse.GetState().LeftButton == ButtonState.Pressed) && (menuToggle == Menus.Play)) { element.destination = mousePosition; }
+
+                    //Character Switch
+                    if ((element.PlayerRect.Contains(mousePosition)) && (Mouse.GetState().RightButton == ButtonState.Pressed)) { currentPlayer = element.ID; }
+
+
+
+                    //Weapon Switch
+                    if ((element.ID == currentPlayer) && (Keyboard.GetState().IsKeyDown(Keys.Space))) { element.SwitchWeapon(); }
+
+                    //Determine Closest Enemy
+                    Enemy closestEnemy = testEnemy;
+                    float smallestDist = 10000;
+                    foreach(Enemy enem in enemies)
+                    {
+                        //rememeber to add check to see if enemy is supposed to be targeted (ie they are alive)
+                        float dist = Vector2.Distance(element.Position, enem.Position);
+                        if (dist < smallestDist) { smallestDist = dist; closestEnemy = enem; }
+                    }
+
+
+                    //Player Updating
+
+                    element.update(closestEnemy.Position, enemies);
+
                 }
 
-                //Player Updating
-                element.update(closestEnemy.Position, enemies,out enemiesAlive);
-                enemies = enemiesAlive;
+                //testEnemy.move(player4.Position);
+                //enemies[0]=(testEnemy);
+                players[0] = player1;
+                players[1] = player2;
+                players[2] = player3;
+                players[3] = player4;
             }
-            //testEnemy.move(player4.Position);
-            //enemies[0]=(testEnemy);
-            players[0] = player1;
-            players[1] = player2;
-            players[2] = player3;
-            players[3] = player4;
             base.Update(gameTime);
+            previousMS = Mouse.GetState();
         }
 
         
@@ -251,12 +256,16 @@ namespace Breach_Of_Contract
                 spriteBatch.Draw(scottSprite, player4.Position, new Rectangle(0, 0, 256, 256), Color.White, player4.Rotation, new Vector2(128, 128), .25f, SpriteEffects.None, 0F);
 
                 //Enemy Drawing
-                foreach (Enemy enem in enemies)
+                if (enemies != null)
                 {
-                    spriteBatch.Draw(enemy1Sprite, enem.Position, new Rectangle(0, 0, 256, 256), Color.White, bulletRot, new Vector2(128, 128), .25f, SpriteEffects.None, 0F);
-                    spriteBatch.Draw(hitbox, enem.Position, new Rectangle(0, 0, 256, 256), Color.White, enem.Rotation, new Vector2(128, 128), .25f, SpriteEffects.None, 0F);
+                    foreach (Enemy enem in enemies)
+                    {
+                        spriteBatch.Draw(enemy1Sprite, enem.Position, new Rectangle(0, 0, 256, 256), Color.White, bulletRot, new Vector2(128, 128), .25f, SpriteEffects.None, 0F);
+                        //spriteBatch.Draw(hitbox, enem.Position, new Rectangle(0, 0, 256, 256), Color.White, enem.Rotation, new Vector2(128, 128), .25f, SpriteEffects.None, 0F);
 
+                    }
                 }
+
 
                 //Bullet Drawing
                 foreach (Player wElement in players)

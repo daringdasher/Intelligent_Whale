@@ -35,6 +35,11 @@ namespace Breach_Of_Contract
         {
             get { return enemyRec; }
         }
+        public bool IsDead
+        {
+            get { return isDead; }
+            set { isDead = value; }
+        }
 
         //Constructor
         public Enemy( /*Weapon[] weaps,*/ Vector2 pos):base()
@@ -44,7 +49,7 @@ namespace Breach_Of_Contract
             position = pos;
             enemyRec = new Rectangle((int)position.X-32, (int)position.Y-32, 64, 64);
         }
-        public override void Shoot(Vector2 bulletDest, List<Enemy> target, out List<Enemy> enemiesStillAlive) { enemiesStillAlive = new List<Enemy>(); }
+        public override void Shoot(Vector2 bulletDest, List<Enemy> target) { }
 
         public override void Shoot(Vector2 bulletDest, List<Player> player)
         {
