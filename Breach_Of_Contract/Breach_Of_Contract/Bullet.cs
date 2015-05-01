@@ -11,7 +11,7 @@ using Microsoft.Xna.Framework.GamerServices;
 
 namespace Breach_Of_Contract
 {
-    class Bullet:Object
+    class Bullet
     {
         //Attributes
         protected Vector2 position;

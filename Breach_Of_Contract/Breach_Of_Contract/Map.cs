@@ -41,6 +41,7 @@ namespace Breach_Of_Contract
                     if (idNum == 0) createPlayer(xCord, yCord);
                     if (idNum == 1) createEnemy(xCord, yCord);
                     if (idNum == 2) createWall(xCord, yCord);
+                    if (idNum == 3) createCouch(xCord, yCord);
                 }
                 return objects;
             }
@@ -62,7 +63,11 @@ namespace Breach_Of_Contract
         }
         public void createWall(int xPos, int yPos)
         {
-            throw new NotImplementedException();
+            objects.Add(new Cover(new Vector2(xPos, yPos), 2));
+        }
+        public void createCouch(int xPos, int yPos)
+        {
+            objects.Add(new Cover(new Vector2(xPos, yPos), 3));
         }
     }
 }

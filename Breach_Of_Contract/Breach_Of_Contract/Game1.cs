@@ -57,6 +57,7 @@ namespace Breach_Of_Contract
         ScreenVariables gameVars;
         List<Enemy> enemies = new List<Enemy>();
         List<Enemy> enemiesAlive = new List<Enemy>();
+        List<Cover> covers = new List<Cover>();
         //Changes
         // added enum 
         Menus menuToggle = Menus.Main;
@@ -141,8 +142,9 @@ namespace Breach_Of_Contract
                 float enemyX = rgen.Next(0, 1281);
                 enemies.Add(new Enemy(new Vector2(enemyX, enemyY)));
             }
-            foreach (object element in objectList)
+            foreach (object o in objectList)
             {
+                if (o is Cover) { covers.Add((Cover)o); }
             }
             //enemies.Add(testEnemy);
 
@@ -270,6 +272,13 @@ namespace Breach_Of_Contract
                             }
                         }
                     }
+                }
+
+                // Wall/Cover drawing 
+                foreach (Cover o in covers)
+                {
+                    if (o.ObjectID == 2) { spriteBatch.Draw(hitbox, o.Position, o.ObjRect, Color.White); } // draw a wall
+                    if (o.ObjectID == 3) { spriteBatch.Draw(hitbox, o.Position, o.ObjRect, Color.White); } // draw a couch/long cover
                 }
             }
             //spriteBatch.Draw(hitbox, player1.Position, new Rectangle(0, 0, 256, 256), Color.White, player1.Rotation, new Vector2(128, 128), .25f, SpriteEffects.None, 0F);
