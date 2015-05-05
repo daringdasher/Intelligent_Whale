@@ -210,7 +210,7 @@ namespace Breach_Of_Contract
 
                     //Player Updating
 
-                    element.update(closestEnemy.Position, enemies);
+                    element.update(closestEnemy.Position, enemies,covers);
 
                 }
 

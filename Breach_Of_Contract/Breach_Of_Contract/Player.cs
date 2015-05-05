@@ -58,24 +58,36 @@ namespace Breach_Of_Contract
             position = pos;
             playerRect = new Rectangle((int)position.X-32, (int)position.Y-32, 64, 64);
         }
-        public void move()
+        public void move(List<Cover> cov)
         {
             if (destination != Vector2.Zero)
             {
                 Vector2 vector = new Vector2(destination.X - position.X, destination.Y - position.Y);
                 Vector2 unitVector = Vector2.Normalize(vector);
                 Vector2 newPosition = new Vector2(position.X + unitVector.X * 2, position.Y + unitVector.Y * 2);
-                position = newPosition;
+                foreach (Cover c in cov)
+                {
+                    if (new Rectangle((int)newPosition.X - 32, (int)newPosition.Y - 32, 64, 64).Intersects(c.ObjRect))
+                    {
+                        Vector2 tempDest = new Vector2(-unitVector.Y, -unitVector.X);
+                        vector = new Vector2(tempDest.X - position.X, tempDest.Y - position.Y);
+                        unitVector = Vector2.Normalize(vector);
+                        newPosition = new Vector2(position.X + unitVector.X * 2, position.Y + unitVector.Y * 2);
+                    }
+                }
+
                 playerRect = new Rectangle((int)position.X - 32, (int)position.Y - 32, 64, 64);
+                position = newPosition;
+
                 rotation = (float)Math.Atan2(vector.X, -vector.Y);
             }
 
         }
 
-        public void update( Vector2 bulletDestination,List<Enemy> enems)
+        public void update( Vector2 bulletDestination,List<Enemy> enems,List<Cover> cover)
         {
             if ((position.X > destination.X - 1) && (position.X < destination.X + 1) && (position.Y > destination.Y - 1) && (position.Y < destination.Y + 1)) destination = new Vector2(0, 0);
-            move();
+            move(cover);
             Shoot(bulletDestination, enems);
            
         }
