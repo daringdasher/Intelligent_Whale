@@ -96,7 +96,7 @@ namespace Breach_Of_Contract
                     {
                         bool hit;
                         bullets[i].Collision(enemy,out hit);
-                        if (hit) { enemy.IsDead = false; }
+                        if (hit) { enemy.IsDead = true; }
                     }
 
                 }

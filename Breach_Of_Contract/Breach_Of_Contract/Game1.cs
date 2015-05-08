@@ -203,15 +203,21 @@ namespace Breach_Of_Contract
                     foreach(Enemy enem in enemies)
                     {
                         //rememeber to add check to see if enemy is supposed to be targeted (ie they are alive)
-                        float dist = Vector2.Distance(element.Position, enem.Position);
-                        if (dist < smallestDist) { smallestDist = dist; closestEnemy = enem; }
+                        if (!enem.IsDead) { 
+                            float dist = Vector2.Distance(element.Position, enem.Position);
+                            if (dist < smallestDist) 
+                            { 
+                                smallestDist = dist; closestEnemy = enem; 
+                            }
+                        }
+                        
                     }
 
 
                     //Player Updating
 
-                    element.update(closestEnemy.Position, enemies,covers);
-
+                    if (closestEnemy != testEnemy) { element.update(closestEnemy.Position, enemies, covers); }
+                    if (closestEnemy == testEnemy) { element.update(covers); }
                 }
 
                 //testEnemy.move(player4.Position);
@@ -260,7 +266,10 @@ namespace Breach_Of_Contract
                 {
                     foreach (Enemy enem in enemies)
                     {
-                        spriteBatch.Draw(enemy1Sprite, enem.Position, new Rectangle(0, 0, 256, 256), Color.White, bulletRot, new Vector2(128, 128), .25f, SpriteEffects.None, 0F);
+                        if (!enem.IsDead)
+                        {
+                            spriteBatch.Draw(enemy1Sprite, enem.Position, new Rectangle(0, 0, 256, 256), Color.White, bulletRot, new Vector2(128, 128), .25f, SpriteEffects.None, 0F);
+                        }
                         //spriteBatch.Draw(hitbox, enem.Position, new Rectangle(0, 0, 256, 256), Color.White, enem.Rotation, new Vector2(128, 128), .25f, SpriteEffects.None, 0F);
 
                     }

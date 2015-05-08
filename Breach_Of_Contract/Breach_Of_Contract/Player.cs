@@ -69,8 +69,12 @@ namespace Breach_Of_Contract
                 {
                     if (new Rectangle((int)newPosition.X - 32, (int)newPosition.Y - 32, 64, 64).Intersects(c.ObjRect))
                     {
-                        Vector2 tempDest = new Vector2(-unitVector.Y, -unitVector.X);
-                        vector = new Vector2(tempDest.X - position.X, tempDest.Y - position.Y);
+                        Vector3 unitVector3D = new Vector3(unitVector.X,unitVector.Y,0);
+                        Vector3 tempDest = Vector3.Cross(unitVector3D, new Vector3(0,0,-1));
+
+                        if (tempDest.X > 0 && tempDest.Y < 0) { vector = new Vector2(tempDest.X + position.X, tempDest.Y + position.Y); }
+                        else if (tempDest.X < 0 && tempDest.Y < 0) { vector = new Vector2(tempDest.X + position.X, tempDest.Y + position.Y); }
+                        else {vector = new Vector2(tempDest.X - position.X, tempDest.Y - position.Y);}
                         unitVector = Vector2.Normalize(vector);
                         newPosition = new Vector2(position.X + unitVector.X * 2, position.Y + unitVector.Y * 2);
                     }
@@ -90,6 +94,11 @@ namespace Breach_Of_Contract
             move(cover);
             Shoot(bulletDestination, enems);
            
+        }
+        public void update(List<Cover> cover)
+        {
+            if ((position.X > destination.X - 1) && (position.X < destination.X + 1) && (position.Y > destination.Y - 1) && (position.Y < destination.Y + 1)) destination = new Vector2(0, 0);
+            move(cover);
         }
 
         public override void Shoot(Vector2 bulletDest, List<Player> target) { }
