@@ -66,12 +66,12 @@ namespace Breach_Of_Contract
         //THESE ARE CHANGES
         Texture2D mainMenu;
         Texture2D hitbox;
-
+        Texture2D helpMenu;
         // rectangle for use as play button
         Rectangle playButton;
         #endregion
         // enum for use in toggling menus/states
-        public enum Menus { Main, Play, HighScore, Options, Exit }
+        public enum Menus { Main, Play, Help, Exit }
 
         //Constructor
         public Game1()
@@ -131,8 +131,8 @@ namespace Breach_Of_Contract
             enemy2Sprite = Content.Load<Texture2D>("Enemies/Enemy2");
             enemy3Sprite = Content.Load<Texture2D>("Enemies/Enemy3");
             bulletSprite = Content.Load<Texture2D>("Bullet");
-            // added gave mainMenu attribute reference to correct file
             mainMenu = Content.Load<Texture2D>("MainMenu");
+            helpMenu = Content.Load<Texture2D>("help_screen");
             p1Bullet = new Bullet();
             p2Bullet = new Bullet();
             p3Bullet = new Bullet();
@@ -248,6 +248,13 @@ namespace Breach_Of_Contract
             {
                 GraphicsDevice.Clear(Color.CornflowerBlue);
                 spriteBatch.Draw(mainMenu, new Rectangle(0, 0, 1280, 720), Color.White);
+            }
+
+            // Help screen Drawing
+            if (menuToggle == Menus.Help)
+            {
+                GraphicsDevice.Clear(Color.CornflowerBlue);
+                spriteBatch.Draw(helpMenu, new Rectangle(0, 0, 1280, 720), Color.White);
             }
 
             if (menuToggle == Menus.Play)
