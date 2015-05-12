@@ -45,6 +45,11 @@ namespace Breach_Of_Contract
         {
             get { return rotation; }
         }
+        public bool IsDead
+        {
+            get { return isDead; }
+            set { isDead = value; }
+        }
         //Constructor
         public Player(string identity, Weapon[] weaps, Vector2 pos):base()
         {

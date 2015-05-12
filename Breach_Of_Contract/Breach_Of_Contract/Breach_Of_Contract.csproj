@@ -89,6 +89,9 @@
     <None Include="Content\Enemies\Enemy3.xnb">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="Content\help_screen.xnb">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="Content\HitBox.xnb">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

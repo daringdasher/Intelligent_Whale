@@ -68,5 +68,14 @@ namespace Breach_Of_Contract
             }
             else hit = false;
         }
+
+        public void Collision(Player target, out bool hit)
+        {
+            if (bulletRect.Intersects(target.Rectangle) && isActive)
+            {
+                isActive = false; destination = new Vector2(0, 0); hit = true; canDraw = false;
+            }
+            else hit = false;
+        }
     }
 }
