@@ -17,11 +17,11 @@ namespace Breach_Of_Contract
         protected Weapon weapon = new Weapon();
         protected Vector2 position;
         protected int health;
-        protected bool isBehindCover;
+        public bool isBehindCover;
         protected bool isDead;
         protected Rectangle enemyRec;
         protected float rotation;
-
+        public Vector2 destination;
 
         //Properties
         public Vector2 Position
@@ -65,7 +65,6 @@ namespace Breach_Of_Contract
                 {
                     if (weapon.bullets[i].isActive)
                     {
-
                         weapon.bullets[i].canDraw = true;
                         weapon.bullets[i].move();
                         Console.WriteLine("Active");
@@ -98,9 +97,9 @@ namespace Breach_Of_Contract
         }
 
         public void update(Vector2 bulletDestination, Player[] plays, List<Cover> cover)
-        {            
-            if(weapon.canFire)
-            Shoot(bulletDestination, plays);
+        {
+            if (weapon.canFire) {Shoot(bulletDestination, plays);}
+            move(destination);
         }
 
         public void move(Vector2 dest)

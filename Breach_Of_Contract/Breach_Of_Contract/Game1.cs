@@ -231,20 +231,35 @@ namespace Breach_Of_Contract
             {
                 Weapon[] playerWeapons1 = { new Weapon(), new Weapon(3, 5, 3, false) };
                 Player closestPlayer = new Player("testPlayer",playerWeapons1,new Vector2(0,0));
-                float smallestDist = 1000000;
+                float smallestDistPlayer = 1000000;
                 foreach (Player p in players)
                 {
                     //rememeber to add check to see if enemy is supposed to be targeted (ie they are alive)
                     if (!p.IsDead)
                     {
                         float dist = Vector2.Distance(e.Position, p.Position);
-                        if (dist < smallestDist)
+                        if (dist < smallestDistPlayer)
                         {
-                            smallestDist = dist; closestPlayer = p;
+                            smallestDistPlayer = dist; closestPlayer = p;
                         }
                     }
-
+                    
                 }
+                Cover closestCover = new Cover(new Vector2(0,0),0);
+                float smallestDistCover = 1000000;
+                foreach (Cover c in covers)
+                {
+                    if (!e.isBehindCover)
+                    {
+                        float dist = Vector2.Distance(e.Position, c.Position);
+                        if (dist < smallestDistCover)
+                        {
+                            smallestDistCover = dist; closestCover = c;
+                        }
+                    }
+                    if (e.Rectangle.Intersects(c.ObjRect)) { e.isBehindCover = true; }
+                }
+                e.destination = closestCover.Position;
                 e.update(closestPlayer.Position, players, covers);
             }
             base.Update(gameTime);
@@ -295,7 +310,7 @@ namespace Breach_Of_Contract
                     {
                         if (!enem.IsDead)
                         {
-                            spriteBatch.Draw(enemy1Sprite, enem.Position, new Rectangle(0, 0, 256, 256), Color.White, bulletRot, new Vector2(128, 128), .25f, SpriteEffects.None, 0F);
+                            spriteBatch.Draw(enemy1Sprite, enem.Position, new Rectangle(0, 0, 256, 256), Color.White, enem.Rotation, new Vector2(128, 128), .25f, SpriteEffects.None, 0F);
                         }
                         //spriteBatch.Draw(hitbox, enem.Position, new Rectangle(0, 0, 256, 256), Color.White, enem.Rotation, new Vector2(128, 128), .25f, SpriteEffects.None, 0F);
                         foreach(Bullet b in enem.Weapon.bullets)
