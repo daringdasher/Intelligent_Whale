@@ -40,7 +40,7 @@ namespace Breach_Of_Contract
     
         //Methods
         public abstract void Shoot(Vector2 bulletDest, List<Enemy> target);
-        public abstract void Shoot(Vector2 bulletDest, List<Player> target);
+        public abstract void Shoot(Vector2 bulletDest, Player[] target);
 
     }
 }

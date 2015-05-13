@@ -106,7 +106,7 @@ namespace Breach_Of_Contract
             move(cover);
         }
 
-        public override void Shoot(Vector2 bulletDest, List<Player> target) { }
+        public override void Shoot(Vector2 bulletDest, Player[] target) { }
 
         public override void Shoot(Vector2 bulletDest, List<Enemy> enemies)
         {

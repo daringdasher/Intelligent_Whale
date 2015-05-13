@@ -227,6 +227,26 @@ namespace Breach_Of_Contract
                 players[2] = player3;
                 players[3] = player4;
             }
+            foreach (Enemy e in enemies)
+            {
+                Weapon[] playerWeapons1 = { new Weapon(), new Weapon(3, 5, 3, false) };
+                Player closestPlayer = new Player("testPlayer",playerWeapons1,new Vector2(0,0));
+                float smallestDist = 1000000;
+                foreach (Player p in players)
+                {
+                    //rememeber to add check to see if enemy is supposed to be targeted (ie they are alive)
+                    if (!p.IsDead)
+                    {
+                        float dist = Vector2.Distance(e.Position, p.Position);
+                        if (dist < smallestDist)
+                        {
+                            smallestDist = dist; closestPlayer = p;
+                        }
+                    }
+
+                }
+                e.update(closestPlayer.Position, players, covers);
+            }
             base.Update(gameTime);
             previousMS = Mouse.GetState();
         }
@@ -278,7 +298,14 @@ namespace Breach_Of_Contract
                             spriteBatch.Draw(enemy1Sprite, enem.Position, new Rectangle(0, 0, 256, 256), Color.White, bulletRot, new Vector2(128, 128), .25f, SpriteEffects.None, 0F);
                         }
                         //spriteBatch.Draw(hitbox, enem.Position, new Rectangle(0, 0, 256, 256), Color.White, enem.Rotation, new Vector2(128, 128), .25f, SpriteEffects.None, 0F);
+                        foreach(Bullet b in enem.Weapon.bullets)
+                        {
+                            if (b.canDraw)
+                            {
+                                spriteBatch.Draw(bulletSprite, b.Position, new Rectangle(0, 0, 64, 64), Color.White, b.Rotation, new Vector2(32, 32), .5f, SpriteEffects.None, 0F);
 
+                            }
+                        }
                     }
                 }
 
@@ -298,6 +325,7 @@ namespace Breach_Of_Contract
                         }
                     }
                 }
+
 
                 // Wall/Cover drawing 
                 foreach (Cover o in covers)

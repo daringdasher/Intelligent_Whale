@@ -36,6 +36,10 @@ namespace Breach_Of_Contract
         {
             get { return enemyRec; }
         }
+        public Weapon Weapon
+        {
+            get { return weapon; }
+        }
         public bool IsDead
         {
             get { return isDead; }
@@ -53,7 +57,7 @@ namespace Breach_Of_Contract
         
         public override void Shoot(Vector2 bulletDest, List<Enemy> target) { }
 
-        public override void Shoot(Vector2 bulletDest, List<Player> players)
+        public override void Shoot(Vector2 bulletDest, Player[] players)
         {
             if (!isDead && weapon.canFire)
             {
@@ -93,7 +97,7 @@ namespace Breach_Of_Contract
             
         }
 
-        public void update(Vector2 bulletDestination, List<Player> plays, List<Cover> cover)
+        public void update(Vector2 bulletDestination, Player[] plays, List<Cover> cover)
         {            
             if(weapon.canFire)
             Shoot(bulletDestination, plays);
